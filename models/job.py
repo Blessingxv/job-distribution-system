@@ -3,6 +3,7 @@ from sqlalchemy.dialects.postgresql import UUID, JSONB
 import uuid
 from datetime import datetime, timezone
 from .database import Base
+from .enums import JobStatus
 
 class Job(Base):
     __tablename__ = "jobs"
@@ -11,7 +12,7 @@ class Job(Base):
     job_type = Column(VARCHAR(50), nullable = False)
     payload = Column(JSONB, nullable = False)
     priority = Column(Integer, nullable = False, default = 0)
-    status = Column(Enum("pending", "running", "completed", "failed", name = "job_status"), nullable = False)
+    status = Column(Enum(JobStatus), name = "job_status", nullable = False)
     created_at = Column(TIMESTAMP(timezone = True), nullable = False, default = lambda: datetime.now(timezone.utc))
     updated_at = Column(
         TIMESTAMP(timezone = True), 
