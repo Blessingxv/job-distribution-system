@@ -6,6 +6,7 @@ from models.database import SessionLocal
 from models.job import Job
 from api.schemas import JobCreateRequest, JobResponse
 from models.enums import JobStatus
+from workers.queues import job_queue
 
 router = APIRouter()
 
@@ -26,6 +27,7 @@ def create_job(request: JobCreateRequest, db: Session = Depends(get_db)):
     )
     db.add(new_job)
     db.commit()
+    job_queue.put(new_job.job_id)
     db.refresh(new_job)
     return JobResponse(
         job_id = new_job.job_id,
