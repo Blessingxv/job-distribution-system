@@ -12,6 +12,6 @@ class Execution(Base):
     worker_id = Column(VARCHAR(50), nullable = True)
     status = Column(Enum("pending", "running", "completed", "failed", name = "executions_status"), nullable = False, default = "pending")
     started_at = Column(TIMESTAMP(timezone = True), nullable = True, default = lambda: datetime.now(timezone.utc))
-    completed_at = Column(TIMESTAMP(timezone = True), nullable = True, default = lambda: datetime.now(timezone.utc))
+    completed_at = Column(TIMESTAMP(timezone = True), nullable = True)
     error_message = Column(Text, nullable = True)
     error_category = Column(VARCHAR(50), nullable = True)

@@ -79,3 +79,9 @@ def beam_calculation(payload):
     actual_bending_stress = compute_bending_stress(M_max, c, I)
 
     return {"result": actual_bending_stress}
+
+JOB_HANDLERS ={
+    "fibonacci": fibonacci,
+    "prime_check": prime_check,
+    "beam_calculation": beam_calculation
+}
