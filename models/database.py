@@ -4,6 +4,7 @@ from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
     database_url: str
+    worker_pool_size: int = 3
 
     class Config:
         env_file = ".env"

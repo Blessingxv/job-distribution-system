@@ -5,16 +5,19 @@ from enum import Enum
 from models.enums import JobStatus
 from workers.handlers import beam_calculation
 
+# Class to represent the type of job
 class JobType(str, Enum):
     FIBONACCI = "fibonacci"
     PRIME_CHECK = "prime_check"
     BEAM_CALCULATION = "beam_calculation"
 
+# Class to represent the request for creating a job
 class JobCreateRequest(BaseModel):
     job_type: JobType
     payload:  dict[str, Any]
     priority: int = Field(default = 0)
 
+    # Validator to ensure the payload is valid based on the job type
     @model_validator(mode = "after")
     def validate_payload(self):
         if self.job_type == JobType.BEAM_CALCULATION:
@@ -53,7 +56,8 @@ class JobCreateRequest(BaseModel):
                 raise ValueError("Prime check job requires an integer value greater than or equal to 2 for 'n'.")
             else:
                 return self
-            
+
+# Class to represent the response for a job            
 class JobResponse(BaseModel): 
     job_id: UUID
     job_type: JobType
