@@ -13,7 +13,7 @@ def fibonacci(payload):
         c = a + b
         a = b
         b = c
-        return {"result": a}
+    return {"result": a}
 
 # Prime check function to determine whether a number is prime or not
 def prime_check(payload):
