@@ -11,7 +11,7 @@ class Settings(BaseSettings):
 
 settings = Settings()
 
-engine = create_engine(settings.database_url)
+engine = create_engine(settings.database_url, pool_size = 10, max_overflow = 20)
 
 Base = declarative_base()
 
