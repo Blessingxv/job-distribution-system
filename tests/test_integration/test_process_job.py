@@ -21,11 +21,11 @@ def test_process_job_fibonacci_success():
     session.refresh(job)
     assert job.status == JobStatus.COMPLETED.value
 
-    execution = session.query(Execution).filter_by(job_id=job_id).first()
+    execution = session.query(Execution).filter_by(job_id = job_id).first()
     assert execution is not None
     assert execution.status == JobStatus.COMPLETED.value
 
-    result = session.query(Result).filter_by(job_id=job_id).first()
+    result = session.query(Result).filter_by(job_id = job_id).first()
     assert result is not None
     assert result.result_data == {"result": 55}
 
