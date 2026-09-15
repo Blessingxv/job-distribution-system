@@ -1,4 +1,4 @@
-from models.database import engine, SessionLocal
+from models.database import SessionLocal
 from models.job import Job
 from models.enums import JobStatus
 from workers.worker import process_job
