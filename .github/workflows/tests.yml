@@ -31,6 +31,10 @@ jobs:
           python-version: '3.13'
       - name: Install dependencies
         run: pip install -r requirements.txt
+      - name: Create database tables
+        run: python -m models.create_model
+        env:
+          DATABASE_URL: postgresql://workflowtest:testpassword@localhost:5432/test_job_dist_db
       - name: Run tests
         run: pytest tests/ -v
         env:
