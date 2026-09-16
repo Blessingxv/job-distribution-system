@@ -1,0 +1,18 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql://appuser:apppass@db:5432/job_dist_db
+
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: appuser
+      POSTGRES_PASSWORD: apppass
+      POSTGRES_DB: job_dist_db
+    ports:
+      - "5432:5432"
