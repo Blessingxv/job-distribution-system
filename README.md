@@ -35,9 +35,9 @@ A job only reaches a completed status once its result has actually been persiste
 
 Job types are restricted to a fixed whitelist mapped to pre-registered handler functions. Clients cannot submit arbitrary code to be executed, only one of the supported job types with a validated payload.
 
-- `fibonacci`: computes the nth Fibonacci number
-- `prime_check`: checks whether a number is prime
-- `beam_calculation`: computes reactions, bending moment and bending stress for a simply supported beam under a single point load
+- fibonacci: computes the nth Fibonacci number
+- prime_check: checks whether a number is prime
+- beam_calculation: computes reactions, bending moment and bending stress for a simply supported beam under a single point load
 
 ## API
 
@@ -53,9 +53,7 @@ Interactive API documentation is available at `/docs` once the app is running.
 
 This is the fastest way to run the whole system, since it starts both the app and a PostgreSQL database with no manual setup.
 
-```
 docker compose up --build
-```
 
 Once running, the API is available at `http://localhost:8000` and the health check at `http://localhost:8000/health`.
 
@@ -63,35 +61,25 @@ Once running, the API is available at `http://localhost:8000` and the health che
 
 Requirements: Python 3.13 and a running PostgreSQL instance.
 
-```
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-```
 
 Create a `.env` file in the project root with your database connection string:
 
-```
 DATABASE_URL=postgresql://<user>:<password>@localhost:5432/<database>
-```
 
 Create the database tables:
 
-```
 python -m models.create_model
-```
 
 Start the app:
 
-```
 uvicorn api.main:app --reload
-```
 
 ## Running the tests
 
-```
 pytest tests/ -v
-```
 
 The test suite covers individual job handlers, the queue and worker pipeline end to end, concurrent job processing and the API's behavior including validation and error responses.
 
@@ -101,14 +89,12 @@ Every push and pull request to main triggers a GitHub Actions workflow that spin
 
 ## Project structure
 
-```
 api/          FastAPI app, routes and Pydantic schemas
 models/       SQLAlchemy models and database setup
 workers/      Job queue, worker loop and job handlers
 tests/        Unit, integration and API tests
 Dockerfile
 docker-compose.yml
-```
 
 ## Design decisions
 
