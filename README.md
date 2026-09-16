@@ -17,9 +17,7 @@ This project was built after completing Harvard's CS50W to demonstrate backend a
 
 ## Architecture
 
-```
 Client -> REST API (FastAPI) -> Job Queue -> Worker Threads -> PostgreSQL
-```
 
 The API validates and persists incoming jobs, then places them on an in memory queue. 
 A configurable number of worker threads pull jobs off the queue, execute the matching handler function and write the outcome back to the database. 
